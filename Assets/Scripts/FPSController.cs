@@ -20,17 +20,21 @@ public class FPSController : MonoBehaviour
     private Vector3 velocity;
     private bool isGrounded;
 
+    // NEW
+    public bool canMove = true;
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
 
-        // Lock cursor
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        LockCursor();
     }
 
     void Update()
     {
+        // STOP EVERYTHING IF UI ACTIVE
+        if (!canMove) return;
+
         // GROUND CHECK
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
@@ -67,5 +71,30 @@ public class FPSController : MonoBehaviour
         // GRAVITY
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+    }
+
+    //CONTROL METHODS
+    public void EnableMovement()
+    {
+        canMove = true;
+        LockCursor();
+    }
+
+    public void DisableMovement()
+    {
+        canMove = false;
+        UnlockCursor();
+    }
+
+    void LockCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    void UnlockCursor()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }
