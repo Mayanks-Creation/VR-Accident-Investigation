@@ -8,6 +8,7 @@ public class PlayerInteract : MonoBehaviour
     public GameObject inspectUI;
 
     private Interactable currentTarget;
+    private Interactable lastTarget;
 
     void Update()
     {
@@ -31,6 +32,16 @@ public class PlayerInteract : MonoBehaviour
             if (interactable != null && !interactable.isCollected)
             {
                 currentTarget = interactable;
+
+                //Highlight logic
+                if (lastTarget != currentTarget)
+                {
+                    ClearLastHighlight();
+
+                    currentTarget.Highlight();
+                    lastTarget = currentTarget;
+                }
+
                 inspectUI.SetActive(true);
                 return;
             }
@@ -44,7 +55,7 @@ public class PlayerInteract : MonoBehaviour
         if (currentTarget != null)
         {
             currentTarget.Interact();
-            inspectUI.SetActive(false);
+            ClearTarget();
         }
     }
 
@@ -52,5 +63,16 @@ public class PlayerInteract : MonoBehaviour
     {
         currentTarget = null;
         inspectUI.SetActive(false);
+
+        ClearLastHighlight();
+    }
+
+    void ClearLastHighlight()
+    {
+        if (lastTarget != null)
+        {
+            lastTarget.RemoveHighlight();
+            lastTarget = null;
+        }
     }
 }

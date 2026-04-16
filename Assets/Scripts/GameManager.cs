@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI evidenceText;
 
     [Header("Settings")]
-    public int minimumEvidenceRequired = 3;
+    public int minimumEvidenceRequired = 12;
 
     void Awake()
     {
@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
 
         playerController.EnableMovement();
 
-        if (collectedCount >= minimumEvidenceRequired)
+        if (collectedCount > minimumEvidenceRequired)
         {
             UnlockDecisionPanel();
         }

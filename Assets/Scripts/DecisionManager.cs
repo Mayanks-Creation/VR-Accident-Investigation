@@ -9,11 +9,11 @@ public class DecisionManager : MonoBehaviour
     {
         if (choice == "Oil")
         {
-            resultText.text = "Correct! Oil spill caused the accident.";
+            resultText.text = "Correct!\n\n“ Oil spill caused a slip hazard leading to the accident “";
         }
         else
         {
-            resultText.text = "Incorrect. Try again.";
+            resultText.text = "“ This hazard exists, but it was not the direct cause, Try again “";
         }
     }
 }
