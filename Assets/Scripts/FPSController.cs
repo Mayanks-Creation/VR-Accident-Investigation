@@ -27,7 +27,7 @@ public class FPSController : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
 
-        LockCursor();
+        //LockCursor();
     }
 
     void Update()

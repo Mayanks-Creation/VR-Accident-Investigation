@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     [Header("UI")]
     public TextMeshProUGUI progressText;
     public GameObject decisionPanel;
+    public GameObject gamestart;
 
     [Header("Evidence Popup")]
     public GameObject evidencePopup;
@@ -32,6 +33,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        ShowGameStart();
         UpdateProgressUI();
 
         if (decisionPanel != null)
@@ -88,6 +90,25 @@ public class GameManager : MonoBehaviour
         {
             decisionPanel.SetActive(true);
             playerController.DisableMovement();
+        }
+    }
+
+    //GameStart
+    void ShowGameStart()
+    {
+        if (gamestart != null)
+        {
+            gamestart.SetActive(true);
+            playerController.DisableMovement();
+        }
+    }
+
+    public void CloseGameStart()
+    {
+        if (gamestart != null)
+        {
+            gamestart.SetActive(false);
+            playerController.EnableMovement();
         }
     }
 }
